@@ -46,5 +46,4 @@ class Myrouterdelegate extends RouterDelegate with ChangeNotifier, PopNavigatorR
   Future<void> setNewRoutePath(configuration) {
     throw UnimplementedError();
   }
-
 }
