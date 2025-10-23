@@ -12,6 +12,7 @@ dependencies:
   provider: ^6.1.5+1
   google_fonts: ^6.3.2
   font_awesome_flutter: ^10.12.0
+  lottie: ^3.3.2
 
 dev_dependencies:
   flutter_test:
@@ -23,3 +24,6 @@ flutter:
   assets:
     - assets/images/background/background.jpg
     - assets/images/logo/logofix.png
+    - assets/lottie/news.json
+    - assets/lottie/arrow_down.json
+    - assets/lottie/backgroundline.json
