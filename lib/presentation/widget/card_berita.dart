@@ -238,25 +238,29 @@ class DesignMobile extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    TextButton(
-                      onPressed: () {
-                        Logger().d("data id dari card ${data.id}");
-                        itemgetclick(data.id.toString());
-                      },
-                      child: const Text("Selengkapnya"),
+                    Expanded(
+                      child: TextButton(
+                        onPressed: () {
+                          Logger().d("data id dari card ${data.id}");
+                          itemgetclick(data.id.toString());
+                        },
+                        child: const Text("Selengkapnya"),
+                      ),
                     ),
                     isadmin
-                        ? TextButton(
-                            onPressed: () {
-                              isdelete(data.id.toString());
-                            },
-                            child: Text(
-                              "Hapus",
-                              style: TextStyle(
-                                color: Theme.of(context).colorScheme.error,
+                        ? Expanded(
+                          child: TextButton(
+                              onPressed: () {
+                                isdelete(data.id.toString());
+                              },
+                              child: Text(
+                                "Hapus",
+                                style: TextStyle(
+                                  color: Theme.of(context).colorScheme.error,
+                                ),
                               ),
                             ),
-                          )
+                        )
                         : Container(),
                   ],
                 ),

@@ -317,7 +317,7 @@ class _WebDesignState extends State<WebDesign> {
                         minWidth: 200,
                       ),
                       child: Padding(
-                        padding: const EdgeInsets.all(50),
+                        padding:widget.isWeb? const EdgeInsets.symmetric(vertical: 50 , horizontal: 50): const EdgeInsets.symmetric(vertical: 50 , horizontal: 10),
                         child: FadeInWidget(
                           child: value.listberita.isEmpty
                               ? Text(value.message)
@@ -353,7 +353,10 @@ class _WebDesignState extends State<WebDesign> {
         children: [
           Text(
             "LIHAT BERITA TERBARU KAMI \n SCROLL KE BAWAH",
-            style: Theme.of(context).textTheme.displayLarge!.copyWith(
+            style: widget.isWeb? Theme.of(context).textTheme.displayLarge!.copyWith(
+              fontWeight: FontWeight.bold,
+              color: Theme.of(context).colorScheme.primary,
+            ):Theme.of(context).textTheme.displaySmall!.copyWith(
               fontWeight: FontWeight.bold,
               color: Theme.of(context).colorScheme.primary,
             ),
@@ -362,8 +365,8 @@ class _WebDesignState extends State<WebDesign> {
           widget.spasiempat,
           Lottie.asset(
             'assets/lottie/arrow_down.json',
-            width: 200,
-            height: 200,
+             width: widget.isWeb?200:100,
+            height: widget.isWeb?200:100,
             repeat: true,
             reverse: false,
             animate: true,
