@@ -80,7 +80,7 @@ class _DetailScreenState extends State<DetailScreen> {
                   SliverToBoxAdapter(
                     child: Padding(
                       padding: EdgeInsets.all(20),
-                      child: Flexible(child: Text(data.deskripsi)),
+                      child: Text(data.deskripsi),
                     ),
                   ),
                 ],
