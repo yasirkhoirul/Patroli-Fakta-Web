@@ -13,6 +13,9 @@ dependencies:
   google_fonts: ^6.3.2
   font_awesome_flutter: ^10.12.0
   lottie: ^3.3.2
+  supabase_flutter: ^2.10.3
+  get_it: ^8.2.0
+  logger: ^2.6.2
 
 dev_dependencies:
   flutter_test:

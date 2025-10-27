@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:patroli_fakta/screen/home.dart';
-import 'package:patroli_fakta/screen/struktur_organisasi.dart';
+import 'package:patroli_fakta/presentation/page/home.dart';
+import 'package:patroli_fakta/presentation/page/struktur_organisasi.dart';
 
 class Myrouterdelegate extends RouterDelegate with ChangeNotifier, PopNavigatorRouterDelegateMixin{
   final GlobalKey<NavigatorState> globalKey;
