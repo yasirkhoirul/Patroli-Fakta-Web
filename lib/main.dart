@@ -1,9 +1,15 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:intl/date_symbol_data_local.dart';
 import 'package:patroli_fakta/data/data_source/supabase/statickey.dart';
+import 'package:patroli_fakta/domain/usecases/remove_berita.dart';
 import 'package:patroli_fakta/locator.dart';
+import 'package:patroli_fakta/presentation/provider/berita_detail_notifier.dart';
 import 'package:patroli_fakta/presentation/provider/berita_list_notifier.dart';
+import 'package:patroli_fakta/presentation/provider/berita_upload_notifier.dart';
+import 'package:patroli_fakta/presentation/provider/login_notifier.dart';
+import 'package:patroli_fakta/presentation/provider/removeberita_notifier.dart';
 import 'package:patroli_fakta/router/router_delegate.dart';
 import 'package:patroli_fakta/theme/theme.dart';
 import 'package:patroli_fakta/theme/util.dart';
@@ -11,10 +17,14 @@ import 'package:provider/provider.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'locator.dart' as lc;
 
-void main() async{
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Supabase.initialize(url: Keysupabase.url, anonKey: Keysupabase.anonpublic);
+  await Supabase.initialize(
+    url: Keysupabase.url,
+    anonKey: Keysupabase.anonpublic,
+  );
   lc.init();
+  await initializeDateFormatting('id_ID', null);
   runApp(
     MultiProvider(
       providers: [
@@ -22,9 +32,16 @@ void main() async{
           create: (context) =>
               Myrouterdelegate(globalKey: GlobalKey<NavigatorState>()),
         ),
-        ChangeNotifierProvider(create: 
-          (context) => getit.get<BeritaListNotifier>(),
-        )
+        ChangeNotifierProvider(
+          create: (context) => getit.get<BeritaListNotifier>(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => getit.get<BeritaDetailNotifier>(),
+        ),
+        ChangeNotifierProvider(create: (context) => getit.get<LoginNotifier>()),
+        ChangeNotifierProvider(
+          create: (context) => getit.get<BeritaUploadNotifier>(),
+        ),ChangeNotifierProvider(create: (context) => getit.get<RemoveberitaNotifier>())
       ],
       child: MainApp(),
     ),

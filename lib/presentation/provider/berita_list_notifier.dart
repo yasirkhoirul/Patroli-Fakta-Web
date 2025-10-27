@@ -20,9 +20,11 @@ class BeritaListNotifier extends ChangeNotifier {
       Logger().d("data nya adalah ${data.length}");
       if (data.isNotEmpty) {
         _listberita = data;
-      Logger().d("data nya lis berita adalah ${listberita}");
         _message = "Data Berhasil Didapatkan";
         Logger().d(message);
+      }else{
+        _listberita = [];
+        _message = "Tidak ada berita terbaru";
       }
     } catch (e) {
       _message = e.toString();
@@ -31,4 +33,5 @@ class BeritaListNotifier extends ChangeNotifier {
       notifyListeners();
     }
   }
+
 }

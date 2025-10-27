@@ -24,7 +24,7 @@ class Frostbox extends StatelessWidget {
           children: [
             //blur
             BackdropFilter(
-              filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
+              filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
               child: Container(),
             ),
             //gradient
@@ -36,7 +36,7 @@ class Frostbox extends StatelessWidget {
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                   colors: [
-                    Colors.white.withValues(alpha: 0.4),
+                    Colors.white.withValues(alpha: 0.2),
                     Colors.white.withValues(alpha: 0.1),
                   ],
                 ),

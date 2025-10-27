@@ -50,7 +50,8 @@ class BeritaRepositoriesImpl implements BeritaRepositories{
   @override
   Future uploadBerita(BeritaEntities data) async{
     try {
-      await remoteDataSource.update(BeritaModel.fromEntity(data)); 
+      Logger().d("masuk repo data ${data.judul}");
+      await remoteDataSource.uploadBerita(BeritaModel.fromEntity(data)); 
     } catch (e) {
       throw Exception(e.toString());
     }

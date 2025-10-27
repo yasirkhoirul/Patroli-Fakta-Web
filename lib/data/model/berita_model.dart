@@ -25,7 +25,4 @@ class BeritaModel{
   BeritaEntities toEntities(){
     return BeritaEntities(id, judul, deskripsi, createdAt);
   }
-
-  
-
 }

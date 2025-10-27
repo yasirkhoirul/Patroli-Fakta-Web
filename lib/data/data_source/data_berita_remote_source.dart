@@ -1,4 +1,5 @@
 
+import 'package:logger/logger.dart';
 import 'package:patroli_fakta/data/model/berita_model.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -28,7 +29,7 @@ class DataBeritaRemoteSourceimpl extends DataBeritaRemoteSource {
     try {
       final data = await supabase
           .from('Berita')
-          .select();
+          .select().order('createdAt',ascending: false);
       return data.map((e) => BeritaModel.fromjson(e)).toList();
     } catch (e) {
       throw Exception("gagal mengambil berita di remote source $e");
@@ -37,7 +38,10 @@ class DataBeritaRemoteSourceimpl extends DataBeritaRemoteSource {
 
   @override
   Future uploadBerita(BeritaModel data) async{
+      Logger().d("masuk source ${data.judul}");
+
     try {
+
       final datatoinsert = data.toJson();
       datatoinsert.remove('id');
       datatoinsert.remove('createdAt');
