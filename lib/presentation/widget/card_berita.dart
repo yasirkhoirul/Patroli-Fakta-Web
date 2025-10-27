@@ -32,8 +32,6 @@ class CardBerita extends StatelessWidget {
                 isadmin: isadmin,
                 isdelete: isadmin
                     ? (id) {
-                        Logger().d("delete diklik");
-
                         deleteclick(id);
                       }
                     : (id) {},
