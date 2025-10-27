@@ -54,9 +54,15 @@ class _DetailScreenState extends State<DetailScreen> {
                         width: 1080,
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: Center(child: Text(data.judul,style: Theme.of(context).textTheme.displayMedium!.copyWith(
-                            color: Theme.of(context).colorScheme.shadow
-                          ),)),
+                          child: Center(
+                            child: Text(
+                              data.judul,
+                              style: Theme.of(context).textTheme.displayMedium!
+                                  .copyWith(
+                                    color: Theme.of(context).colorScheme.shadow,
+                                  ),
+                            ),
+                          ),
                         ),
                       ),
                       centerTitle: true,
@@ -79,7 +85,7 @@ class _DetailScreenState extends State<DetailScreen> {
                   ),
                 ],
               ),
-              _ => Container()
+              _ => Container(),
             };
           },
         ),

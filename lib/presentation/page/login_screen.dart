@@ -6,11 +6,8 @@ import 'package:provider/provider.dart';
 
 class LoginScreen extends StatefulWidget {
   final Function() signintap;
-  
-  const LoginScreen({
-    super.key,
-    required this.signintap,
-  });
+
+  const LoginScreen({super.key, required this.signintap});
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();

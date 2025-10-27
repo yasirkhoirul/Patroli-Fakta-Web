@@ -248,7 +248,9 @@ class _WebDesignState extends State<WebDesign> {
                         ? Row(children: lookDown())
                         : ConstrainedBox(
                             constraints: BoxConstraints(maxHeight: 1000),
-                            child: Column(children: lookDown().reversed.toList()),
+                            child: Column(
+                              children: lookDown().reversed.toList(),
+                            ),
                           ),
                   ),
                 ),
@@ -262,32 +264,38 @@ class _WebDesignState extends State<WebDesign> {
         Consumer<BeritaListNotifier>(
           builder: (context, value, child) {
             Logger().d(value.listberita.length);
-            return value.listberita.isEmpty? SliverToBoxAdapter(child: Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: Center(child: Text("Tidak Ada Berita Terbaru")),
-            )):SliverList.builder(
-              itemCount: value.listberita.length,
-              itemBuilder: (context, index) => ConstrainedBox(
-                constraints: BoxConstraints(
-                  maxHeight: 700,
-                  maxWidth: 1200,
-                  minHeight: 600,
-                  minWidth: 200,
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(50),
-                  child: FadeInWidget(
-                    child: CardBerita(
-                      isweb: widget.isWeb,
-                      data: value.listberita[index],
-                      itemgetclick: (id) {
-                        widget.widget.itemgetclick(id);
-                      }, isadmin: false, deleteclick: (String id) { },
+            return value.listberita.isEmpty
+                ? SliverToBoxAdapter(
+                    child: Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: Center(child: Text("Tidak Ada Berita Terbaru")),
                     ),
-                  ),
-                ),
-              ),
-            );
+                  )
+                : SliverList.builder(
+                    itemCount: value.listberita.length,
+                    itemBuilder: (context, index) => ConstrainedBox(
+                      constraints: BoxConstraints(
+                        maxHeight: 700,
+                        maxWidth: 1200,
+                        minHeight: 600,
+                        minWidth: 200,
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(50),
+                        child: FadeInWidget(
+                          child: CardBerita(
+                            isweb: widget.isWeb,
+                            data: value.listberita[index],
+                            itemgetclick: (id) {
+                              widget.widget.itemgetclick(id);
+                            },
+                            isadmin: false,
+                            deleteclick: (String id) {},
+                          ),
+                        ),
+                      ),
+                    ),
+                  );
           },
         ),
       ],

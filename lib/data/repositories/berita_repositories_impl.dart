@@ -4,23 +4,23 @@ import 'package:patroli_fakta/data/model/berita_model.dart';
 import 'package:patroli_fakta/domain/entities/berita_entities.dart';
 import 'package:patroli_fakta/domain/repositories/berita_repositories.dart';
 
-class BeritaRepositoriesImpl implements BeritaRepositories{
+class BeritaRepositoriesImpl implements BeritaRepositories {
   final DataBeritaRemoteSource remoteDataSource;
   BeritaRepositoriesImpl(this.remoteDataSource);
   @override
-  Future<List<BeritaEntities>> getAllBerita() async{
+  Future<List<BeritaEntities>> getAllBerita() async {
     Logger().d("repo data diajalankan");
 
     try {
       final data = await remoteDataSource.getListBerita();
-      return data.map((e) => e.toEntities(),).toList();
+      return data.map((e) => e.toEntities()).toList();
     } catch (e) {
       throw Exception(e.toString());
     }
   }
 
   @override
-  Future<BeritaEntities> getDetailBerita(id) async{
+  Future<BeritaEntities> getDetailBerita(id) async {
     try {
       final data = await remoteDataSource.getDetailBerita(id);
       return data.toEntities();
@@ -30,7 +30,7 @@ class BeritaRepositoriesImpl implements BeritaRepositories{
   }
 
   @override
-  Future removeBerita(id) async{
+  Future removeBerita(id) async {
     try {
       await remoteDataSource.removeBerita(id);
     } catch (e) {
@@ -39,7 +39,7 @@ class BeritaRepositoriesImpl implements BeritaRepositories{
   }
 
   @override
-  Future updateBerita(BeritaEntities data) async{
+  Future updateBerita(BeritaEntities data) async {
     try {
       await remoteDataSource.update(BeritaModel.fromEntity(data));
     } catch (e) {
@@ -48,13 +48,12 @@ class BeritaRepositoriesImpl implements BeritaRepositories{
   }
 
   @override
-  Future uploadBerita(BeritaEntities data) async{
+  Future uploadBerita(BeritaEntities data) async {
     try {
       Logger().d("masuk repo data ${data.judul}");
-      await remoteDataSource.uploadBerita(BeritaModel.fromEntity(data)); 
+      await remoteDataSource.uploadBerita(BeritaModel.fromEntity(data));
     } catch (e) {
       throw Exception(e.toString());
     }
   }
-
 }

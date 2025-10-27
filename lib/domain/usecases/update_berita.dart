@@ -5,7 +5,7 @@ class UpdateBerita {
   final BeritaRepositories repo;
   UpdateBerita(this.repo);
 
-  Future excute(BeritaEntities data){
+  Future excute(BeritaEntities data) {
     return repo.updateBerita(data);
   }
 }

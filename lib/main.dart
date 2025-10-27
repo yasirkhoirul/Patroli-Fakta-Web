@@ -3,7 +3,6 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:patroli_fakta/data/data_source/supabase/statickey.dart';
-import 'package:patroli_fakta/domain/usecases/remove_berita.dart';
 import 'package:patroli_fakta/locator.dart';
 import 'package:patroli_fakta/presentation/provider/berita_detail_notifier.dart';
 import 'package:patroli_fakta/presentation/provider/berita_list_notifier.dart';
@@ -41,7 +40,10 @@ void main() async {
         ChangeNotifierProvider(create: (context) => getit.get<LoginNotifier>()),
         ChangeNotifierProvider(
           create: (context) => getit.get<BeritaUploadNotifier>(),
-        ),ChangeNotifierProvider(create: (context) => getit.get<RemoveberitaNotifier>())
+        ),
+        ChangeNotifierProvider(
+          create: (context) => getit.get<RemoveberitaNotifier>(),
+        ),
       ],
       child: MainApp(),
     ),

@@ -15,23 +15,22 @@ class BeritaListNotifier extends ChangeNotifier {
 
   Future fetchdatalistberita() async {
     try {
-    Logger().d("fetch data diajalankan");
+      Logger().d("fetch data diajalankan");
       final data = await getallberita.execute();
       Logger().d("data nya adalah ${data.length}");
       if (data.isNotEmpty) {
         _listberita = data;
         _message = "Data Berhasil Didapatkan";
         Logger().d(message);
-      }else{
+      } else {
         _listberita = [];
         _message = "Tidak ada berita terbaru";
       }
     } catch (e) {
       _message = e.toString();
-        Logger().d(message);
-    }finally{
+      Logger().d(message);
+    } finally {
       notifyListeners();
     }
   }
-
 }

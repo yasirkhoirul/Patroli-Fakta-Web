@@ -6,7 +6,7 @@ class GetAllBerita {
   final BeritaRepositories repo;
   const GetAllBerita(this.repo);
 
-  Future<List<BeritaEntities>> execute(){
+  Future<List<BeritaEntities>> execute() {
     Logger().d("usecase diajalankan");
     return repo.getAllBerita();
   }

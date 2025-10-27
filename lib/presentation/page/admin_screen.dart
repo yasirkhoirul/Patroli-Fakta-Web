@@ -61,7 +61,7 @@ class _AdminScreenState extends State<AdminScreen> {
           );
         });
         break;
-        case Issuksesmessage(message: var message):
+      case Issuksesmessage():
         Logger().d("ini dijalankan");
         context.read<BeritaListNotifier>().fetchdatalistberita();
         break;
@@ -300,37 +300,45 @@ class _WebDesignState extends State<WebDesign> {
 
         Consumer<BeritaListNotifier>(
           builder: (context, value, child) {
-            return value.listberita.isEmpty? SliverToBoxAdapter(child: Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: Center(child: Text("Tidak Ada Berita Terbaru")),
-            )): SliverList.builder(
-              itemCount: value.listberita.length,
-              itemBuilder: (context, index) => ConstrainedBox(
-                constraints: BoxConstraints(
-                  maxHeight: 700,
-                  maxWidth: 1200,
-                  minHeight: 600,
-                  minWidth: 200,
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(50),
-                  child: FadeInWidget(
-                    child: value.listberita.isEmpty? Text(value.message): CardBerita(
-                      isweb: widget.isWeb,
-                      data: value.listberita[index],
-                      itemgetclick: (id) {
-                        widget.widget.itemgetclick(id);
-                      },
-                      isadmin: true,
-                      deleteclick: (String id) {
-                        Logger().d("delete di klik");
-                        context.read<RemoveberitaNotifier>().deleteberita(id);
-                      },
+            return value.listberita.isEmpty
+                ? SliverToBoxAdapter(
+                    child: Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: Center(child: Text("Tidak Ada Berita Terbaru")),
                     ),
-                  ),
-                ),
-              ),
-            );
+                  )
+                : SliverList.builder(
+                    itemCount: value.listberita.length,
+                    itemBuilder: (context, index) => ConstrainedBox(
+                      constraints: BoxConstraints(
+                        maxHeight: 700,
+                        maxWidth: 1200,
+                        minHeight: 600,
+                        minWidth: 200,
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(50),
+                        child: FadeInWidget(
+                          child: value.listberita.isEmpty
+                              ? Text(value.message)
+                              : CardBerita(
+                                  isweb: widget.isWeb,
+                                  data: value.listberita[index],
+                                  itemgetclick: (id) {
+                                    widget.widget.itemgetclick(id);
+                                  },
+                                  isadmin: true,
+                                  deleteclick: (String id) {
+                                    Logger().d("delete di klik");
+                                    context
+                                        .read<RemoveberitaNotifier>()
+                                        .deleteberita(id);
+                                  },
+                                ),
+                        ),
+                      ),
+                    ),
+                  );
           },
         ),
       ],

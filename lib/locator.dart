@@ -20,29 +20,53 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 
 final GetIt getit = GetIt.instance;
 
-void init(){
-  getit.registerLazySingleton<SupabaseClient>(() => Supabase.instance.client,);
+void init() {
+  getit.registerLazySingleton<SupabaseClient>(() => Supabase.instance.client);
 
   //remote
-  getit.registerLazySingleton<AuthRemoteSource>(() => AuthRemoteSourceimpl(getit.get<SupabaseClient>()),);
-  getit.registerLazySingleton<DataBeritaRemoteSource>(() => DataBeritaRemoteSourceimpl(getit.get<SupabaseClient>()),);
+  getit.registerLazySingleton<AuthRemoteSource>(
+    () => AuthRemoteSourceimpl(getit.get<SupabaseClient>()),
+  );
+  getit.registerLazySingleton<DataBeritaRemoteSource>(
+    () => DataBeritaRemoteSourceimpl(getit.get<SupabaseClient>()),
+  );
 
   //repo
-  getit.registerLazySingleton<BeritaRepositories>(() => BeritaRepositoriesImpl(getit.get<DataBeritaRemoteSource>()));
-  getit.registerLazySingleton<AuthRepositories>(() => AuthRepositoriesImpl(getit.get<AuthRemoteSource>()),);
+  getit.registerLazySingleton<BeritaRepositories>(
+    () => BeritaRepositoriesImpl(getit.get<DataBeritaRemoteSource>()),
+  );
+  getit.registerLazySingleton<AuthRepositories>(
+    () => AuthRepositoriesImpl(getit.get<AuthRemoteSource>()),
+  );
 
   //usecase
-  getit.registerLazySingleton(() => LoginUser(getit.get<AuthRepositories>()),);
-  getit.registerLazySingleton(() => GetAllBerita(getit.get<BeritaRepositories>()),);
-  getit.registerLazySingleton(() => GetDetailBerita(getit.get<BeritaRepositories>()),);
-  getit.registerLazySingleton(() => RemoveBerita(getit.get<BeritaRepositories>()),);
-  getit.registerLazySingleton(() => UpdateBerita(getit.get<BeritaRepositories>()),);
-  getit.registerLazySingleton(() => UploadBerita(getit.get<BeritaRepositories>()),);
+  getit.registerLazySingleton(() => LoginUser(getit.get<AuthRepositories>()));
+  getit.registerLazySingleton(
+    () => GetAllBerita(getit.get<BeritaRepositories>()),
+  );
+  getit.registerLazySingleton(
+    () => GetDetailBerita(getit.get<BeritaRepositories>()),
+  );
+  getit.registerLazySingleton(
+    () => RemoveBerita(getit.get<BeritaRepositories>()),
+  );
+  getit.registerLazySingleton(
+    () => UpdateBerita(getit.get<BeritaRepositories>()),
+  );
+  getit.registerLazySingleton(
+    () => UploadBerita(getit.get<BeritaRepositories>()),
+  );
 
   //notifier
-  getit.registerFactory(() => LoginNotifier(getit.get<LoginUser>()),);
-  getit.registerFactory(() => BeritaListNotifier(getallberita:getit.get<GetAllBerita>()),);
-  getit.registerFactory(() => BeritaDetailNotifier(beritadata: getit.get<GetDetailBerita>(),),);
-  getit.registerFactory(() => BeritaUploadNotifier(getit.get<UploadBerita>()),);
-  getit.registerFactory(() => RemoveberitaNotifier(removeberita:getit.get<RemoveBerita>()),);
+  getit.registerFactory(() => LoginNotifier(getit.get<LoginUser>()));
+  getit.registerFactory(
+    () => BeritaListNotifier(getallberita: getit.get<GetAllBerita>()),
+  );
+  getit.registerFactory(
+    () => BeritaDetailNotifier(beritadata: getit.get<GetDetailBerita>()),
+  );
+  getit.registerFactory(() => BeritaUploadNotifier(getit.get<UploadBerita>()));
+  getit.registerFactory(
+    () => RemoveberitaNotifier(removeberita: getit.get<RemoveBerita>()),
+  );
 }

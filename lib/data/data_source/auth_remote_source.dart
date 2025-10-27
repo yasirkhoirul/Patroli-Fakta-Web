@@ -2,14 +2,14 @@ import 'package:patroli_fakta/data/model/user_model.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 abstract class AuthRemoteSource {
-  Future<UserModel> loginadmin(String email,String password);
+  Future<UserModel> loginadmin(String email, String password);
 }
 
 class AuthRemoteSourceimpl implements AuthRemoteSource {
   final SupabaseClient supabase;
   AuthRemoteSourceimpl(this.supabase);
   @override
-  Future<UserModel> loginadmin(String email,String password) async {
+  Future<UserModel> loginadmin(String email, String password) async {
     try {
       final AuthResponse res = await supabase.auth.signInWithPassword(
         email: email,
@@ -20,8 +20,7 @@ class AuthRemoteSourceimpl implements AuthRemoteSource {
       } else {
         throw Exception("terjadi kesalahan");
       }
-    }on AuthApiException 
-    catch (e) {
+    } on AuthApiException catch (e) {
       throw Exception(e.message);
     }
   }

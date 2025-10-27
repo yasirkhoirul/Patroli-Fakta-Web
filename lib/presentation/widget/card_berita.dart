@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:logger/logger.dart';
 import 'package:patroli_fakta/domain/entities/berita_entities.dart';
-import 'package:patroli_fakta/presentation/provider/berita_detail_notifier.dart';
 import 'package:patroli_fakta/presentation/widget/frostbox.dart';
-import 'package:provider/provider.dart';
 
 class CardBerita extends StatelessWidget {
   final bool isadmin;
@@ -17,7 +15,8 @@ class CardBerita extends StatelessWidget {
     required this.data,
     required this.itemgetclick,
     required this.isweb,
-    required this.isadmin, required this.deleteclick,
+    required this.isadmin,
+    required this.deleteclick,
   });
   @override
   Widget build(BuildContext context) {
@@ -30,19 +29,25 @@ class CardBerita extends StatelessWidget {
             ? DesignWeb(
                 data: data,
                 itemgetclick: itemgetclick,
-                isadmin: isadmin, isdelete: isadmin?(id){
-                  Logger().d("delete diklik");
+                isadmin: isadmin,
+                isdelete: isadmin
+                    ? (id) {
+                        Logger().d("delete diklik");
 
-                  deleteclick(id);
-                }:(id){},
+                        deleteclick(id);
+                      }
+                    : (id) {},
               )
             : DesignMobile(
                 data: data,
                 itemgetclick: itemgetclick,
-                isadmin: isadmin, isdelete: isadmin?(id){
-                  Logger().d("delete diklik");
-                  deleteclick(id);
-                }:(id){},
+                isadmin: isadmin,
+                isdelete: isadmin
+                    ? (id) {
+                        Logger().d("delete diklik");
+                        deleteclick(id);
+                      }
+                    : (id) {},
               ),
       ),
     );
@@ -50,14 +55,14 @@ class CardBerita extends StatelessWidget {
 }
 
 class DesignWeb extends StatelessWidget {
-   
   const DesignWeb({
     super.key,
     required this.data,
     required this.itemgetclick,
-    required this.isadmin, required this.isdelete,
+    required this.isadmin,
+    required this.isdelete,
   });
-  
+
   final Function(String id) isdelete;
   final bool isadmin;
   final BeritaEntities data;
@@ -159,7 +164,8 @@ class DesignMobile extends StatelessWidget {
     super.key,
     required this.data,
     required this.itemgetclick,
-    required this.isadmin, required this.isdelete,
+    required this.isadmin,
+    required this.isdelete,
   });
   final Function(String id) isdelete;
   final bool isadmin;
@@ -218,7 +224,6 @@ class DesignMobile extends StatelessWidget {
                           overflow: TextOverflow.fade,
                         ),
                       ),
-                      
                     ],
                   ),
                 ),
@@ -235,7 +240,6 @@ class DesignMobile extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    
                     TextButton(
                       onPressed: () {
                         Logger().d("data id dari card ${data.id}");
@@ -244,13 +248,18 @@ class DesignMobile extends StatelessWidget {
                       child: const Text("Selengkapnya"),
                     ),
                     isadmin
-                          ? TextButton(
+                        ? TextButton(
                             onPressed: () {
                               isdelete(data.id.toString());
                             },
-                            child: Text("Hapus",style: TextStyle(color: Theme.of(context).colorScheme.error),),
+                            child: Text(
+                              "Hapus",
+                              style: TextStyle(
+                                color: Theme.of(context).colorScheme.error,
+                              ),
+                            ),
                           )
-                          : Container(),
+                        : Container(),
                   ],
                 ),
               ],

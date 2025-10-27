@@ -4,7 +4,7 @@ import 'package:patroli_fakta/domain/repositories/auth_repositories.dart';
 class LoginUser {
   final AuthRepositories auth;
   LoginUser(this.auth);
-  Future<UserEntities> execute(String email,String password){
+  Future<UserEntities> execute(String email, String password) {
     return auth.login(email, password);
   }
 }

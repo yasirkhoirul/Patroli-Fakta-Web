@@ -92,8 +92,10 @@ class _UploadScreenState extends State<UploadScreen> {
                   content: Text("Berhasil"),
                   actions: [
                     TextButton(
-                      onPressed: () async{
-                        await context.read<BeritaListNotifier>().fetchdatalistberita();
+                      onPressed: () async {
+                        await context
+                            .read<BeritaListNotifier>()
+                            .fetchdatalistberita();
                         value.setidle();
                       },
                       child: const Text("ok"),

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:patroli_fakta/presentation/provider/berita_detail_notifier.dart';
 import 'package:patroli_fakta/presentation/provider/berita_list_notifier.dart';
 
 import 'package:patroli_fakta/presentation/provider/login_notifier.dart';
@@ -42,7 +41,6 @@ class StatusDialogManager extends StatelessWidget {
         ),
         icon: Icon(Icons.check),
         content: const Text('Proses berhasil diselesaikan.'),
-        
       );
     }
 
@@ -64,7 +62,6 @@ class StatusDialogManager extends StatelessWidget {
     return const SizedBox.shrink();
   }
 }
-
 
 class StatusDialogManagerAdmin extends StatelessWidget {
   const StatusDialogManagerAdmin({super.key});
@@ -101,11 +98,13 @@ class StatusDialogManagerAdmin extends StatelessWidget {
         icon: Icon(Icons.check),
         content: const Text('Proses berhasil diselesaikan.'),
         actions: [
-          TextButton(onPressed: (){
-            context.read<RemoveberitaNotifier>().setidle();
-          }, child: const Text("ok"))
+          TextButton(
+            onPressed: () {
+              context.read<RemoveberitaNotifier>().setidle();
+            },
+            child: const Text("ok"),
+          ),
         ],
-        
       );
     }
 
@@ -128,4 +127,3 @@ class StatusDialogManagerAdmin extends StatelessWidget {
     return const SizedBox.shrink();
   }
 }
-

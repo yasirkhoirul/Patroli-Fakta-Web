@@ -17,7 +17,6 @@ class Frostbox extends StatelessWidget {
     return ClipRRect(
       borderRadius: BorderRadiusGeometry.circular(12),
       child: SizedBox(
-        
         height: height,
         width: width,
         child: Stack(
