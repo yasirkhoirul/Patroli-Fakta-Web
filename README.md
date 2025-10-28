@@ -1,3 +1,1 @@
-# patroli_fakta
-
-A new Flutter project.
+his project is a Flutter-based web and Android application designed to manage and publish news content. It allows users to upload, edit, and display news articles seamlessly across platforms. The project aims to provide an efficient and user-friendly solution for digital news management.
