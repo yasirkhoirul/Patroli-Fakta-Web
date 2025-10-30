@@ -309,7 +309,7 @@ class _WebDesignState extends State<WebDesign> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Text(
-            "LIHAT BERITA TERBARU KAMI \n SCROLL KE BAWAH",
+            "LIHAT BERITA TERBARU KAMI \n SCROLL KE BAWAH ",
             style: widget.isWeb? Theme.of(context).textTheme.displayLarge!.copyWith(
               fontWeight: FontWeight.bold,
               color: Theme.of(context).colorScheme.primary,
