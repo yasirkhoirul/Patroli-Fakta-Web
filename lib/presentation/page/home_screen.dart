@@ -54,7 +54,8 @@ class _HomescreenState extends State<Homescreen> {
                 Divider(height: 1),
                 SizedBox(height: 5),
                 ListTile(
-                  onTap: () {
+                  onTap: () async{
+                    context.read<BeritaListNotifier>().goInstagram();
                     Navigator.pop(context);
                   },
                   leading: FaIcon(FontAwesomeIcons.instagram, size: 32),
@@ -62,6 +63,7 @@ class _HomescreenState extends State<Homescreen> {
                 ),
                 ListTile(
                   onTap: () {
+                    context.read<BeritaListNotifier>().gotwitter();
                     Navigator.pop(context);
                   },
                   leading: FaIcon(FontAwesomeIcons.twitter, size: 32),

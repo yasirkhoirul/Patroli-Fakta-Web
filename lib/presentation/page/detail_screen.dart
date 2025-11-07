@@ -39,6 +39,7 @@ class _DetailScreenState extends State<DetailScreen> {
               IsuksesDetail(data: var data) => CustomScrollView(
                 slivers: [
                   SliverAppBar(
+                    pinned: true,
                     title: Text(
                       "Patroli Fakta",
                       style: Theme.of(context).textTheme.displaySmall!.copyWith(
@@ -49,22 +50,7 @@ class _DetailScreenState extends State<DetailScreen> {
                     expandedHeight: 500,
                     flexibleSpace: FlexibleSpaceBar(
                       titlePadding: EdgeInsets.only(bottom: 20),
-                      title: Frostbox(
-                        height: 200,
-                        width: 1080,
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Center(
-                            child: Text(
-                              data.judul,
-                              style: Theme.of(context).textTheme.displayMedium!
-                                  .copyWith(
-                                    color: Theme.of(context).colorScheme.shadow,
-                                  ),
-                            ),
-                          ),
-                        ),
-                      ),
+                      
                       centerTitle: true,
                       background: Hero(
                         tag: widget.idDetail,
@@ -80,7 +66,24 @@ class _DetailScreenState extends State<DetailScreen> {
                   SliverToBoxAdapter(
                     child: Padding(
                       padding: EdgeInsets.all(20),
-                      child: Text(data.deskripsi),
+                      child: Column(
+                        children: [
+                          MediaQuery.of(context).size.width>850?
+                              Text(
+                              data.judul,
+                              style: Theme.of(context).textTheme.displayMedium!
+                                  
+                            ):Text(
+                              data.judul,
+                              style: Theme.of(context).textTheme.headlineMedium!
+                                  
+                            ),
+                          SizedBox(height: 12,),
+                          Divider(height: 1,),
+                          SizedBox(height: 12,),
+                          Text(data.deskripsi),
+                        ],
+                      ),
                     ),
                   ),
                 ],

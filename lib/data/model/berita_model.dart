@@ -41,3 +41,4 @@ class BeritaModel {
     return BeritaEntities(id, judul, deskripsi, createdAt);
   }
 }
+

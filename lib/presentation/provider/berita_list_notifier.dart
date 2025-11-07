@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
 import 'package:patroli_fakta/domain/entities/berita_entities.dart';
 import 'package:patroli_fakta/domain/usecases/get_all_berita.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class BeritaListNotifier extends ChangeNotifier {
   List<BeritaEntities> _listberita = [];
@@ -31,6 +32,19 @@ class BeritaListNotifier extends ChangeNotifier {
       Logger().d(message);
     } finally {
       notifyListeners();
+    }
+  }
+
+  Future goInstagram() async{
+    final uri = Uri.parse("https://instagram.com/patrolifakta");
+    if (!await launchUrl(uri, mode: LaunchMode.externalApplication)) {
+      throw Exception('Tidak dapat membuka $uri');
+    }
+  }
+  Future gotwitter() async{
+    final uri = Uri.parse("https://twitter.com/patrolifakta");
+    if (!await launchUrl(uri, mode: LaunchMode.externalApplication)) {
+      throw Exception('Tidak dapat membuka $uri');
     }
   }
 }
