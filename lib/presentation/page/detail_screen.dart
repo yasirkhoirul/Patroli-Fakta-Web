@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
 import 'package:patroli_fakta/presentation/provider/berita_detail_notifier.dart';
 import 'package:patroli_fakta/presentation/provider/status_provider.dart';
-import 'package:patroli_fakta/presentation/widget/frostbox.dart';
 import 'package:provider/provider.dart';
 
 class DetailScreen extends StatefulWidget {

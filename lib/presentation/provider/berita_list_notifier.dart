@@ -35,15 +35,20 @@ class BeritaListNotifier extends ChangeNotifier {
     }
   }
 
-  Future goInstagram() async{
+  Future goInstagram() async {
     final uri = Uri.parse("https://instagram.com/patrolifakta");
-    if (!await launchUrl(uri, mode: LaunchMode.externalApplication)) {
+    // Biarkan default (platformDefault), yang akan membuka tab baru di web.
+    // Tidak perlu 'mode' atau 'webOnlyWindowName'.
+    if (!await launchUrl(uri)) {
       throw Exception('Tidak dapat membuka $uri');
     }
   }
-  Future gotwitter() async{
+
+  Future gotwitter() async {
     final uri = Uri.parse("https://twitter.com/patrolifakta");
-    if (!await launchUrl(uri, mode: LaunchMode.externalApplication)) {
+    // Biarkan default (platformDefault), yang akan membuka tab baru di web.
+    // Tidak perlu 'mode' atau 'webOnlyWindowName'.
+    if (!await launchUrl(uri)) {
       throw Exception('Tidak dapat membuka $uri');
     }
   }
