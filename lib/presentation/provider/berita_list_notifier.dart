@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
 import 'package:patroli_fakta/domain/entities/berita_entities.dart';
+import 'package:patroli_fakta/domain/entities/berita_type.dart';
 import 'package:patroli_fakta/domain/usecases/get_all_berita.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -17,7 +18,7 @@ class BeritaListNotifier extends ChangeNotifier {
   Future fetchdatalistberita() async {
     try {
       Logger().d("fetch data diajalankan");
-      final data = await getallberita.execute();
+      final data = await getallberita.execute(type: BeritaType.all);
       Logger().d("data nya adalah ${data.length}");
       if (data.isNotEmpty) {
         _listberita = data;

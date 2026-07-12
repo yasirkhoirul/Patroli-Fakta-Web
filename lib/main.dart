@@ -9,6 +9,8 @@ import 'package:patroli_fakta/presentation/provider/berita_list_notifier.dart';
 import 'package:patroli_fakta/presentation/provider/berita_upload_notifier.dart';
 import 'package:patroli_fakta/presentation/provider/login_notifier.dart';
 import 'package:patroli_fakta/presentation/provider/removeberita_notifier.dart';
+import 'package:patroli_fakta/presentation/provider/unverified_berita_list_notifier.dart';
+import 'package:patroli_fakta/presentation/provider/verified_berita_list_notifier.dart';
 import 'package:patroli_fakta/router/router_delegate.dart';
 import 'package:patroli_fakta/theme/theme.dart';
 import 'package:patroli_fakta/theme/util.dart';
@@ -43,6 +45,12 @@ void main() async {
         ),
         ChangeNotifierProvider(
           create: (context) => getit.get<RemoveberitaNotifier>(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => getit.get<VerifiedBeritaListNotifier>(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => getit.get<UnverifiedBeritaListNotifier>(),
         ),
       ],
       child: MainApp(),

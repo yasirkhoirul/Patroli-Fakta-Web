@@ -13,6 +13,8 @@ import 'package:patroli_fakta/domain/usecases/update_berita.dart';
 import 'package:patroli_fakta/domain/usecases/upload_berita.dart';
 import 'package:patroli_fakta/presentation/provider/berita_detail_notifier.dart';
 import 'package:patroli_fakta/presentation/provider/berita_list_notifier.dart';
+import 'package:patroli_fakta/presentation/provider/unverified_berita_list_notifier.dart';
+import 'package:patroli_fakta/presentation/provider/verified_berita_list_notifier.dart';
 import 'package:patroli_fakta/presentation/provider/berita_upload_notifier.dart';
 import 'package:patroli_fakta/presentation/provider/login_notifier.dart';
 import 'package:patroli_fakta/presentation/provider/removeberita_notifier.dart';
@@ -61,6 +63,12 @@ void init() {
   getit.registerFactory(() => LoginNotifier(getit.get<LoginUser>()));
   getit.registerFactory(
     () => BeritaListNotifier(getallberita: getit.get<GetAllBerita>()),
+  );
+  getit.registerFactory(
+    () => VerifiedBeritaListNotifier(getallberita: getit.get<GetAllBerita>()),
+  );
+  getit.registerFactory(
+    () => UnverifiedBeritaListNotifier(getallberita: getit.get<GetAllBerita>()),
   );
   getit.registerFactory(
     () => BeritaDetailNotifier(beritadata: getit.get<GetDetailBerita>()),

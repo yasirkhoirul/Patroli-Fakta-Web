@@ -26,8 +26,15 @@ class LoginNotifier extends ChangeNotifier {
     }
   }
 
+  logout() {
+    _user = null;
+    status = Isidle();
+    notifyListeners();
+  }
+
   setidle() {
     status = Isidle();
     notifyListeners();
   }
 }
+

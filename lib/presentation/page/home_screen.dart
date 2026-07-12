@@ -1,7 +1,6 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:logger/web.dart';
 import 'package:lottie/lottie.dart';
 import 'package:patroli_fakta/data/data_source/staticdata/staticdata.dart';
@@ -14,10 +13,14 @@ import 'package:provider/provider.dart';
 class Homescreen extends StatefulWidget {
   final Function(String id) itemgetclick;
   final Function() onclickstruktur;
+  final Function() onVerifiedNewsTap;
+  final Function() onCekFaktaTap;
   const Homescreen({
     super.key,
     required this.onclickstruktur,
     required this.itemgetclick,
+    required this.onVerifiedNewsTap,
+    required this.onCekFaktaTap,
   });
 
   @override
@@ -36,45 +39,7 @@ class _HomescreenState extends State<Homescreen> {
   @override
   Widget build(BuildContext context) {
     final colortheme = Theme.of(context).colorScheme;
-    return Scaffold(
-      drawer: Builder(
-        builder: (context) {
-          return Drawer(
-            child: ListView(
-              padding: EdgeInsets.all(10),
-              children: [
-                Text(
-                  "Patroli Fakta",
-                  style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                    fontWeight: FontWeight.bold,
-                    color: Theme.of(context).colorScheme.primary,
-                  ),
-                ),
-                SizedBox(height: 10),
-                Divider(height: 1),
-                SizedBox(height: 5),
-                ListTile(
-                  onTap: () async{
-                    context.read<BeritaListNotifier>().goInstagram();
-                    Navigator.pop(context);
-                  },
-                  leading: FaIcon(FontAwesomeIcons.instagram, size: 32),
-                  title: const Text("Instagram"),
-                ),
-                ListTile(
-                  onTap: () {
-                    context.read<BeritaListNotifier>().gotwitter();
-                    Navigator.pop(context);
-                  },
-                  leading: FaIcon(FontAwesomeIcons.twitter, size: 32),
-                  title: const Text("Twitter"),
-                ),
-              ],
-            ),
-          );
-        },
-      ),
-      body: SafeArea(
+    return SafeArea(
         child: Stack(
           children: [
             Container(
@@ -106,8 +71,7 @@ class _HomescreenState extends State<Homescreen> {
             ),
           ],
         ),
-      ),
-    );
+      );
   }
 }
 
@@ -385,3 +349,7 @@ class _WebDesignState extends State<WebDesign> {
     ),
   ];
 }
+
+
+
+

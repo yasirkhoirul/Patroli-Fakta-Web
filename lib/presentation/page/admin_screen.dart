@@ -1,7 +1,6 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:logger/web.dart';
 import 'package:lottie/lottie.dart';
 import 'package:patroli_fakta/data/data_source/staticdata/staticdata.dart';
@@ -16,10 +15,14 @@ import 'package:provider/provider.dart';
 class AdminScreen extends StatefulWidget {
   final Function(String id) itemgetclick;
   final Function() onclickstruktur;
+  final Function() onVerifiedNewsTap;
+  final Function() onCekFaktaTap;
   const AdminScreen({
     super.key,
     required this.onclickstruktur,
     required this.itemgetclick,
+    required this.onVerifiedNewsTap,
+    required this.onCekFaktaTap,
   });
 
   @override
@@ -73,74 +76,37 @@ class _AdminScreenState extends State<AdminScreen> {
   @override
   Widget build(BuildContext context) {
     final colortheme = Theme.of(context).colorScheme;
-    return Scaffold(
-      drawer: Builder(
-        builder: (context) {
-          return Drawer(
-            child: ListView(
-              padding: EdgeInsets.all(10),
-              children: [
-                Text(
-                  "Patroli Fakta",
-                  style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                    fontWeight: FontWeight.bold,
-                    color: Theme.of(context).colorScheme.primary,
-                  ),
-                ),
-                SizedBox(height: 10),
-                Divider(height: 1),
-                SizedBox(height: 5),
-                ListTile(
-                  onTap: () {
-                    Navigator.pop(context);
-                  },
-                  leading: FaIcon(FontAwesomeIcons.instagram, size: 32),
-                  title: const Text("Instagram"),
-                ),
-                ListTile(
-                  onTap: () {
-                    Navigator.pop(context);
-                  },
-                  leading: FaIcon(FontAwesomeIcons.twitter, size: 32),
-                  title: const Text("Twitter"),
-                ),
-              ],
-            ),
-          );
-        },
-      ),
-      body: SafeArea(
-        child: Stack(
-          children: [
-            Container(
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [colortheme.outlineVariant, colortheme.onTertiary],
-                  begin: Alignment.topRight,
-                  end: Alignment.bottomLeft,
-                ),
+    return SafeArea(
+      child: Stack(
+        children: [
+          Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [colortheme.outlineVariant, colortheme.onTertiary],
+                begin: Alignment.topRight,
+                end: Alignment.bottomLeft,
               ),
             ),
-            LayoutBuilder(
-              builder: (context, constrain) {
-                final width = constrain.biggest.width;
-                if (width > 850) {
-                  return WebDesign(
-                    widget: widget,
-                    spasiempat: spasiempat,
-                    isWeb: true,
-                  );
-                } else {
-                  return WebDesign(
-                    widget: widget,
-                    spasiempat: spasiempat,
-                    isWeb: false,
-                  );
-                }
-              },
-            ),
-          ],
-        ),
+          ),
+          LayoutBuilder(
+            builder: (context, constrain) {
+              final width = constrain.biggest.width;
+              if (width > 850) {
+                return WebDesign(
+                  widget: widget,
+                  spasiempat: spasiempat,
+                  isWeb: true,
+                );
+              } else {
+                return WebDesign(
+                  widget: widget,
+                  spasiempat: spasiempat,
+                  isWeb: false,
+                );
+              }
+            },
+          ),
+        ],
       ),
     );
   }
@@ -317,7 +283,15 @@ class _WebDesignState extends State<WebDesign> {
                         minWidth: 200,
                       ),
                       child: Padding(
-                        padding:widget.isWeb? const EdgeInsets.symmetric(vertical: 50 , horizontal: 50): const EdgeInsets.symmetric(vertical: 50 , horizontal: 10),
+                        padding: widget.isWeb
+                            ? const EdgeInsets.symmetric(
+                                vertical: 50,
+                                horizontal: 50,
+                              )
+                            : const EdgeInsets.symmetric(
+                                vertical: 50,
+                                horizontal: 10,
+                              ),
                         child: FadeInWidget(
                           child: value.listberita.isEmpty
                               ? Text(value.message)
@@ -353,20 +327,23 @@ class _WebDesignState extends State<WebDesign> {
         children: [
           Text(
             "LIHAT BERITA TERBARU KAMI \n SCROLL KE BAWAH",
-            style: widget.isWeb? Theme.of(context).textTheme.displayLarge!.copyWith(
-              fontWeight: FontWeight.bold,
-              color: Theme.of(context).colorScheme.primary,
-            ):Theme.of(context).textTheme.displaySmall!.copyWith(
-              fontWeight: FontWeight.bold,
-              color: Theme.of(context).colorScheme.primary,
-            ),
+            style: widget.isWeb
+                ? Theme.of(context).textTheme.displayLarge!.copyWith(
+                    fontWeight: FontWeight.bold,
+                    color: Theme.of(context).colorScheme.primary,
+                  )
+                : Theme.of(context).textTheme.displaySmall!.copyWith(
+                    fontWeight: FontWeight.bold,
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
             textAlign: TextAlign.center,
           ),
+
           widget.spasiempat,
           Lottie.asset(
             'assets/lottie/arrow_down.json',
-             width: widget.isWeb?200:100,
-            height: widget.isWeb?200:100,
+            width: widget.isWeb ? 200 : 100,
+            height: widget.isWeb ? 200 : 100,
             repeat: true,
             reverse: false,
             animate: true,
@@ -426,3 +403,4 @@ class _WebDesignState extends State<WebDesign> {
     ),
   ];
 }
+

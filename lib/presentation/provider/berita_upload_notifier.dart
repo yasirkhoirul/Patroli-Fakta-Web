@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
 import 'package:patroli_fakta/domain/entities/berita_entities.dart';
+import 'package:patroli_fakta/domain/entities/berita_type.dart';
 import 'package:patroli_fakta/domain/usecases/upload_berita.dart';
 import 'package:patroli_fakta/presentation/provider/status_provider.dart';
 
@@ -14,7 +15,7 @@ class BeritaUploadNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
-  uploadberita(String judul, String deskripsi) async {
+  uploadberita(String judul, String deskripsi, BeritaType type) async {
     if (judul.isEmpty || deskripsi.isEmpty) {
       status = Iserror("Judul atau deskripsi tidak boleh kososng");
       notifyListeners();
@@ -24,7 +25,7 @@ class BeritaUploadNotifier extends ChangeNotifier {
     notifyListeners();
     try {
       Logger().d("masuk notifier dikirim ke usecase $judul");
-      await upberita.execute(BeritaEntities(0, judul, deskripsi, ""));
+      await upberita.execute(BeritaEntities(0, judul, deskripsi, "", type));
       status = Issuksesmessage(message: "berhasil");
     } catch (e) {
       status = Iserror(e.toString());

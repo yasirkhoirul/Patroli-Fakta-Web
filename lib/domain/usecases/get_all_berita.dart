@@ -1,13 +1,14 @@
 import 'package:logger/logger.dart';
 import 'package:patroli_fakta/domain/entities/berita_entities.dart';
+import 'package:patroli_fakta/domain/entities/berita_type.dart';
 import 'package:patroli_fakta/domain/repositories/berita_repositories.dart';
 
 class GetAllBerita {
   final BeritaRepositories repo;
   const GetAllBerita(this.repo);
 
-  Future<List<BeritaEntities>> execute() {
+  Future<List<BeritaEntities>> execute({required BeritaType type}) {
     Logger().d("usecase diajalankan");
-    return repo.getAllBerita();
+    return repo.getAllBerita(type: type);
   }
 }

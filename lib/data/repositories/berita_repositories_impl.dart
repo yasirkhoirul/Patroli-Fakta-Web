@@ -2,17 +2,18 @@ import 'package:logger/logger.dart';
 import 'package:patroli_fakta/data/data_source/data_berita_remote_source.dart';
 import 'package:patroli_fakta/data/model/berita_model.dart';
 import 'package:patroli_fakta/domain/entities/berita_entities.dart';
+import 'package:patroli_fakta/domain/entities/berita_type.dart';
 import 'package:patroli_fakta/domain/repositories/berita_repositories.dart';
 
 class BeritaRepositoriesImpl implements BeritaRepositories {
   final DataBeritaRemoteSource remoteDataSource;
   BeritaRepositoriesImpl(this.remoteDataSource);
   @override
-  Future<List<BeritaEntities>> getAllBerita() async {
+  Future<List<BeritaEntities>> getAllBerita({required BeritaType type}) async {
     Logger().d("repo data diajalankan");
 
     try {
-      final data = await remoteDataSource.getListBerita();
+      final data = await remoteDataSource.getListBerita(type: type);
       return data.map((e) => e.toEntities()).toList();
     } catch (e) {
       throw Exception(e.toString());

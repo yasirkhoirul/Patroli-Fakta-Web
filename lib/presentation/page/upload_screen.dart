@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:logger/web.dart';
+import 'package:patroli_fakta/domain/entities/berita_type.dart';
 import 'package:patroli_fakta/presentation/provider/berita_list_notifier.dart';
 import 'package:patroli_fakta/presentation/provider/berita_upload_notifier.dart';
 import 'package:patroli_fakta/presentation/provider/status_provider.dart';
@@ -13,9 +14,11 @@ class UploadScreen extends StatefulWidget {
 }
 
 class _UploadScreenState extends State<UploadScreen> {
+  BeritaType selectedType = BeritaType.unverified;
+
   Future uploadtaps(String judul, String deskripsi) async {
     Logger().d("dikirim ke notifier $judul");
-    await context.read<BeritaUploadNotifier>().uploadberita(judul, deskripsi);
+    await context.read<BeritaUploadNotifier>().uploadberita(judul, deskripsi, selectedType);
   }
 
   final judul = TextEditingController();
@@ -46,6 +49,14 @@ class _UploadScreenState extends State<UploadScreen> {
                         child: IsiUpload(
                           judul: judul,
                           deskripsi: deskripsi,
+                          selectedType: selectedType,
+                          onTypeChanged: (type) {
+                            if (type != null) {
+                              setState(() {
+                                selectedType = type;
+                              });
+                            }
+                          },
                           uploadtap: () {
                             uploadtaps(judul.text, deskripsi.text);
                           },
@@ -60,6 +71,14 @@ class _UploadScreenState extends State<UploadScreen> {
                         child: IsiUpload(
                           judul: judul,
                           deskripsi: deskripsi,
+                          selectedType: selectedType,
+                          onTypeChanged: (type) {
+                            if (type != null) {
+                              setState(() {
+                                selectedType = type;
+                              });
+                            }
+                          },
                           uploadtap: () {
                             uploadtaps(judul.text, deskripsi.text);
                           },
@@ -97,6 +116,8 @@ class _UploadScreenState extends State<UploadScreen> {
                             .read<BeritaListNotifier>()
                             .fetchdatalistberita();
                         value.setidle();
+                        judul.clear();
+                        deskripsi.clear();
                       },
                       child: const Text("ok"),
                     ),
@@ -117,10 +138,15 @@ class IsiUpload extends StatelessWidget {
   final Function() uploadtap;
   final TextEditingController judul;
   final TextEditingController deskripsi;
+  final BeritaType selectedType;
+  final Function(BeritaType?) onTypeChanged;
+
   const IsiUpload({
     super.key,
     required this.judul,
     required this.deskripsi,
+    required this.selectedType,
+    required this.onTypeChanged,
     required this.uploadtap,
   });
 
@@ -137,6 +163,24 @@ class IsiUpload extends StatelessWidget {
             "Upload Berita",
             style: Theme.of(context).textTheme.displayLarge,
             textAlign: TextAlign.center,
+          ),
+          DropdownButtonFormField<BeritaType>(
+            initialValue: selectedType,
+            decoration: const InputDecoration(
+              labelText: "Tipe Berita",
+              border: OutlineInputBorder(),
+            ),
+            items: const [
+              DropdownMenuItem(
+                value: BeritaType.unverified,
+                child: Text("Unverified"),
+              ),
+              DropdownMenuItem(
+                value: BeritaType.verified,
+                child: Text("Verified"),
+              ),
+            ],
+            onChanged: onTypeChanged,
           ),
           Expanded(
             flex: 2,

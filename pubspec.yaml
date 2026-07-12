@@ -11,7 +11,7 @@ dependencies:
     sdk: flutter
   provider: ^6.1.5+1
   google_fonts: ^6.3.2
-  font_awesome_flutter: ^10.12.0
+  font_awesome_flutter: ^11.0.0
   lottie: ^3.3.2
   supabase_flutter: ^2.10.3
   get_it: ^8.2.0
