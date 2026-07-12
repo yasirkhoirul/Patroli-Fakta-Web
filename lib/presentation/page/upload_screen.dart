@@ -18,7 +18,11 @@ class _UploadScreenState extends State<UploadScreen> {
 
   Future uploadtaps(String judul, String deskripsi) async {
     Logger().d("dikirim ke notifier $judul");
-    await context.read<BeritaUploadNotifier>().uploadberita(judul, deskripsi, selectedType);
+    await context.read<BeritaUploadNotifier>().uploadberita(
+      judul,
+      deskripsi,
+      selectedType,
+    );
   }
 
   final judul = TextEditingController();
@@ -173,7 +177,7 @@ class IsiUpload extends StatelessWidget {
             items: const [
               DropdownMenuItem(
                 value: BeritaType.unverified,
-                child: Text("Unverified"),
+                child: Text("Cek Berita"),
               ),
               DropdownMenuItem(
                 value: BeritaType.verified,
